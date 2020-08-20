@@ -14,7 +14,7 @@ function confirmWorks() {
 function removeUserInput() {
   //getting rid of user inputs
   var garbo = document.querySelector("form");
-  list.removeChild(garbo);
+  document.getElementById("list-section").removeChild(garbo);
 }
 
 function addItem(value) {
@@ -32,7 +32,7 @@ function addItem(value) {
   taskSection.appendChild(bubble);
   taskSection.appendChild(listItem);
 
-  list.appendChild(taskSection);
+  document.getElementById("list-section").appendChild(taskSection);
 
   //adding inner text to new elements
   listItem.innerText = value;
@@ -46,7 +46,7 @@ function askUserInput() {
   input.innerHTML =
     "<input type='text' name='to-do-item' id ='userItem' placeholder='Insert To Do Item' onchange='checkValue(this.value)'> <button type='button' onclick='getItem()'>Add to List</button>";
 
-  list.appendChild(input);
+  document.getElementById("list-section").appendChild(input);
 }
 
 function getItem() {
@@ -68,7 +68,7 @@ var instruction = document.getElementById("interaction");
 
 function helperText() {
   var helpText = document.createElement("p");
-  helpText.style = "background-color:lightgreen;";
+  helpText.classList.add("user-check");
   instruction.appendChild(helpText);
   helpText.innerText =
     "Hello! Please click on the value you want to get rid of.";
@@ -101,11 +101,12 @@ function determineTaskToDelete() {
 }
 
 function isThereTasks() {
-  var test = list.children;
-  if (test.length <= 2) {
-    alert("no task here to delete");
-  } else {
+  var test = document.getElementById("list-section").children;
+  if (test.length >0 ) {
     determineTaskToDelete();
+  } else {
+    
+    alert("no task here to delete");
   }
 }
 
@@ -138,7 +139,6 @@ function unCheckTask(elements) {
 
 function helperText2() {
   var helpText = document.createElement("p");
-  helpText.style = "background-color:lightgreen;";
   instruction.appendChild(helpText);
   helpText.classList.add("user-check");
   helpText.innerText =
@@ -172,12 +172,15 @@ function userSelects() {
   });
 }
 function isThereTasks2() {
-  var test = list.children;
-  if (test.length <= 2) {
-    alert("no tasks here!");
-  } else {
+  var test = document.getElementById("list-section").children;
+  if (test.length > 0) {
     helperText2();
     userSelects();
+  } else {
+
+    alert("no tasks here!");
+    var helpText = document.querySelector(".user-check");
+    helpText.remove();
   }
 }
 
